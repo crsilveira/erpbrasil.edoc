@@ -122,8 +122,8 @@ ESTADO_QRCODE = {
         NFCE_AMBIENTE_HOMOLOGACAO: "http://www.hom.nfe.se.gov.br/nfce/qrcode?p=",
     },
     "SP": {
-        NFCE_AMBIENTE_PRODUCAO: "https://www.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=",
-        NFCE_AMBIENTE_HOMOLOGACAO: "https://www.homologacao.nfce.fazenda.sp.gov.br/NFCeConsultaPublica/Paginas/ConsultaQRCode.aspx?p=",
+        NFCE_AMBIENTE_PRODUCAO: "https://www.nfce.fazenda.sp.gov.br/qrcode?p=",
+        NFCE_AMBIENTE_HOMOLOGACAO: "https://www.homologacao.nfce.fazenda.sp.gov.br/qrcode?p=",
     },
     "TO": {
         NFCE_AMBIENTE_PRODUCAO: "http://www.sefaz.to.gov.br/nfce/qrcode?p=",
@@ -266,7 +266,7 @@ class NFCe(NFe):
         return self._build_qrcode(pre_qrcode, qr_hash)
 
     def _build_pre_qrcode(self, nfce_chave):
-        return f"{nfce_chave}|{self.qrcode_versao}|{self.ambiente}|{self.csc_token}"
+        return f"{nfce_chave}|{self.qrcode_versao}|{self.ambiente}|{self.csc_token.lstrip('0')}"
 
     def _compute_qr_hash(self, pre_qrcode_with_csc):
         hash_object = hashlib.sha1(pre_qrcode_with_csc.encode("utf-8"))
